@@ -21,6 +21,7 @@ public class Contact {
         String firstName = addFirstName();
         String lastName = addLastName();
         String phoneNumber = addPhoneNumber();
+        String newContactInfo = firstName +" "+ lastName+" "+ phoneNumber;
     }
 
         private static String addFirstName(){
