@@ -12,9 +12,38 @@ public class Contact {
                 "5. Exit.\n" +
                 "Enter an option (1, 2, 3, 4 or 5):");
         String userInput = scanner.nextLine();
-        if(userInput.equals("2")){
+        if(userInput.equals("1")) {
+            System.out.println("Here are your current contacts. ");
+
+        }
+        else if (userInput.equals("2")){
             addNewContact();
         }
+        else if (userInput.equals("3")){
+            searchContact();
+        }
+        else if (userInput.equals("4")){
+            deleteContact();
+        }
+        else if (userInput.equals("5")){
+            System.out.println("Goodbye");
+        }
+    }
+
+    private static void  viewAllContact(){
+
+    }
+
+    private static String deleteContact(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which contact would you like to delete. ");
+        return scanner.nextLine();
+    }
+
+    private static String searchContact(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter contact name to lookup. ");
+        return scanner.nextLine();
     }
 
     private static void addNewContact() {
