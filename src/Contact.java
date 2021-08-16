@@ -1,8 +1,15 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Contact {
 
-    public static void contactApp(){
+
+
+    public static void contactApp() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What action do you want to perform? \n" +
                 "1. View contacts.\n" +
@@ -14,7 +21,7 @@ public class Contact {
         String userInput = scanner.nextLine();
         if(userInput.equals("1")) {
             System.out.println("Here are your current contacts. ");
-
+            viewAllContact();
         }
         else if (userInput.equals("2")){
             addNewContact();
@@ -29,9 +36,15 @@ public class Contact {
             System.out.println("Goodbye");
         }
     }
+    private static String directory = "data";
+    private static String filename = "contactList.txt";
+    private static Path dataDirectory = Paths.get(directory,filename);
 
-    private static void  viewAllContact(){
-
+    private static void  viewAllContact() throws IOException {
+        List<String> List = Files.readAllLines(dataDirectory);
+        for (int i = 0; i < List.size(); i += 1) {
+            System.out.println((i + 1) + ": " + List.get(i));
+        }
     }
 
     private static String deleteContact(){
