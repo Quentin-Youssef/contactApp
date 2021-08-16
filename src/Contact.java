@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +14,8 @@ public class Contact {
 
     public static void contactApp() throws IOException {
         Scanner scanner = new Scanner(System.in);
+        boolean goAgain = true;
+        do{
         System.out.println("What action do you want to perform? \n" +
                 "1. View contacts.\n" +
                 "2. Add a new contact.\n" +
@@ -22,6 +27,7 @@ public class Contact {
         if(userInput.equals("1")) {
             System.out.println("Here are your current contacts. ");
             viewAllContact();
+            System.out.println(" ");
         }
         else if (userInput.equals("2")){
             addNewContact();
@@ -34,7 +40,10 @@ public class Contact {
         }
         else if (userInput.equals("5")){
             System.out.println("Goodbye");
-        }
+        } if (userInput.equals("5")){
+                goAgain = false;
+            }
+        }while(goAgain);
     }
     private static String directory = "data";
     private static String filename = "contactList.txt";
@@ -59,11 +68,16 @@ public class Contact {
         return scanner.nextLine();
     }
 
-    private static void addNewContact() {
+    private static void addNewContact() throws IOException {
         String firstName = addFirstName();
         String lastName = addLastName();
         String phoneNumber = addPhoneNumber();
         String newContactInfo = firstName +" "+ lastName+" "+ phoneNumber;
+        Files.write(
+                Paths.get("data", "contactList.txt"),
+                Collections.singletonList(newContactInfo), // list with one item
+                StandardOpenOption.APPEND
+        );
     }
 
         private static String addFirstName(){
